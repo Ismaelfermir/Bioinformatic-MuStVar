@@ -29,21 +29,25 @@ mutect2 = read.table(filesMutect[1], sep = "\t", header = T)
 strelka2 = read.table(filesStrelka[1], sep = "\t", header = T)
 varscan2 = read.table(filesVarScan[1], sep = "\t", header = T)
 
-mutect2fil = mutect2[,1:22]
-strelka2fil = strelka2[,1:22]
+mutect2fil = mutect2[,c(1:22,35,34,42,41)]
+strelka2fil = strelka2[,c(1:22,51,63,38,64)]
 mutect2fil$sampleID = mutect2$sample
+mutect2fil$AF = toString(mutect2fil$AF)
+mutect2fil$gAF = toString(mutect2fil$gAF)
 strelka2fil$sampleID =strelka2$SampleID
 mutect2fil$Caller = c("Mutect2")
 varscan2$Caller = c("Varscan2")
 strelka2fil$Caller = c("Strelka2")
 
+colnames(strelka2fil) = c(colnames(mutect2fil))
+
 var = rbind(mutect2fil, strelka2fil)
 var <- var[with(var, order(var$Start)), ]
 
-varscan2fil = varscan2[,c(1,2,2,3,4,29,27,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,28,29)]
-varscan2fil$Caller = c("Varscan2")
+varscan2$NAs = c(NA)
+varscan2fil = varscan2[,c(1,2,2,3,4,30,27,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,26,11,25,7,28,30)]
 colnames(varscan2fil) = colnames(var)
-varscan2fil[,8:(ncol(varscan2fil)-2)] = NA
+varscan2fil$Caller = c("Varscan2")
 
 var = rbind(var, varscan2fil)
 var <- var[with(var, order(var$Start, var$Alt) ), ]
@@ -66,6 +70,7 @@ for (l in 2:nrow(var)) {
 
 var2 = var[unique(k),]
 var2 <- var2[with(var2, order(var2$Start, var2$Alt) ),]
+
 setwd(directory)
 write.table(var2, "Variantes.Strelka.Varscan.Mutect.validation", sep = "\t", row.names = F)
 
