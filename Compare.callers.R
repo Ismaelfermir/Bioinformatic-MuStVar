@@ -2,11 +2,10 @@
 # Author: Ismael
 # Date: 10-2020
 
-# Comparacion de variantes detectadas por:
+# Comparing variants from Mutect2, Strelka2 and VarScan2
 # Strelka2 ILUMINA
 # VarScan2
 # Mutect2 GATK
-# Instalacion de los paquetes necesarios
 #packages <- c("xlsx", "gdata", "plyr", "png")
 #if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
 #  install.packages(setdiff(packages, rownames(installed.packages())))  

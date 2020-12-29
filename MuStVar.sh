@@ -1,5 +1,5 @@
 #!/bin/bash
-#	Author: Ismael Fernandez
+#	Author: Ismael Fernandez-Miranda
 #	Modified year: 2020
 
 echo -e '\nMake sure that your normal and tumor alignmet files are named as:\n'
