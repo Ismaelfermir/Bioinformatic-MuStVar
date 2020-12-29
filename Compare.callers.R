@@ -89,9 +89,8 @@ write.table(muIndels, "Indels.Mutect.validation", sep = "\t", row.names = F)
 
 # ------------------------------------------------
 
-# Comparacion y actualizacion de base de datos
+# Comparing mutational files with the data base
 
-# Creando la funcion encargada de realizar la comparacion con la base de datos
 confronti.multipli <- function(mut.file, path, out.file){
   path <- path
   filenames <- list.files(path, pattern = "")
@@ -111,7 +110,7 @@ confronti.multipli <- function(mut.file, path, out.file){
   cat("Comparacion con base de datos correcta!")
 }
 
-# Lanzando la funcion en una sola muestra
+# Launch the function for comparing...
 confronti.multipli("~/.temporal/output/Variantes.Strelka.Varscan.Mutect.validation",  # Input file
                    "~/.temporal/DB/",  # Database compare
                    "~/.temporal/output/Variantes.Strelka.Varscan.Mutect.comparedDB.validation")

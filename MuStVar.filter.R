@@ -1,13 +1,13 @@
 #!/bin/R
-# Author: Ismael
-# Date: 10-2019
+# Author: Ismael Fernandez-Miranda
+# Date: 2020
 
 # Mutect2
 
 #install.packages("tidyverse")
 library(tidyr)
 
-bed = c("~/.temporal/Beato_OncoPanel_TE-91860463_hg38_mpileup.bed")
+bed = c("~/.temporal/PanelBedFile.bed")
 bedfile = read.table(bed, sep = "\t", header = F, quote= "")
 
 data_base = c("~/.temporal/DB/")
@@ -112,7 +112,7 @@ for (f in 1:length(files_1)) {
   for (i in 1:nrow(BD)) {
     BD$AF[i] = as.numeric(BD$ADvar1[i]) /  as.numeric(BD$ADref[i])}
   
-  # Actualizando la base de datos
+  # Uploading SNVs data base
   
   BD1 = BD[,c(1,2,4,5,34)]
   BDF = BD1
@@ -123,12 +123,12 @@ for (f in 1:length(files_1)) {
   write.table(BDF, toString(sampleID), sep = "\t", row.names = F)
   
   por = f*100/length(files_1)
-  cat(round(por, 0) , "% completado\n")
+  cat(round(por, 0) , "% completed\n")
 }
 setwd(output)
-write.table(t, "Variantes.Mutect2", sep = "\t", row.names = F)
+write.table(t, "SNVs.Mutect2", sep = "\t", row.names = F)
 setwd(final_output)
-write.table(t, "Variantes.Mutect2", sep = "\t", row.names = F)
+write.table(t, "SNVs.Mutect2", sep = "\t", row.names = F)
 cat("Done!\n")
 
 
@@ -272,7 +272,7 @@ for (f in 1:length(files_1)) {
   if (is.null(x) == FALSE) {write.table(x, file = files_2[f], sep = "\t", row.names = F); t = rbind(t, x)}
   write.table(table1, file = files_1[f], sep = "\t", row.names = F)
   
-  # Actualizando la base de datos
+  # Uploading SNVs data base
   
   sampleID = gsub("_snp.hg38_multianno.txt_completa.txt","_Strelka", files_1[f])
   BDF = BD[,c(1,2,4,5,(ncol(BD)-1))]
@@ -281,13 +281,13 @@ for (f in 1:length(files_1)) {
   setwd(data_base)
   write.table(BDF, toString(sampleID), sep = "\t", row.names = F)
   por = f*100/length(files_1)
-  cat(round(por, 0) , "% completado\n")
+  cat(round(por, 0) , "% completed\n")
 }
 setwd(directory_output)
-write.table(t, "Variantes.SNVs.Strelka", sep = "\t", row.names = F)
+write.table(t, "SNVs.Strelka", sep = "\t", row.names = F)
 
 setwd(final_output)
-write.table(t, "Variantes.SNVs.Strelka", sep = "\t", row.names = F)
+write.table(t, "SNVs.Strelka", sep = "\t", row.names = F)
 cat("Done!\n")
 
 
@@ -299,8 +299,6 @@ cat("Done!\n")
 
 
 # VarScan2
-
-# Filtrado de variantes de cfDNA de tumor y normal
 
 cat("\nFiltering the VarScan2 annotation files...\n")
 directorio = c("~/.temporal/VarScan2/")
@@ -316,7 +314,7 @@ Pvalue = 5/(PanelSize*4)
 
 for (f in 1:length(files_1)) {
   
-  # SNPs
+  # SNVs
   
   setwd(directorio)
   TD = read.table(files_1[f], sep = "\t", header = T, quote= "")
@@ -398,7 +396,7 @@ for (f in 1:length(files_1)) {
   setwd(directorio_output)
   write.table(TDfilterIndel, toString(files_2[f]), row.names = F, sep = "\t")
   
-  # Actualizando base de datos
+  # Uploading SNVs data base
   
   validation = rbind(validationSNPs, validationIndel)
   validation = validation[,c(1,2,3,4,11)]
@@ -409,7 +407,7 @@ for (f in 1:length(files_1)) {
   setwd(data_base)
   write.table(validation, toString(sampleID), sep = "\t", row.names = F)
   
-  # Uniendo archivos en uno solo
+  # Joining files
   
   sampleID = gsub(".snp","_VarScan2", files_1[f])
   if (is.data.frame(library) == T) {
@@ -423,12 +421,12 @@ for (f in 1:length(files_1)) {
     library = rbind(TDfilter, TDfilterIndel)}
   
   setwd(directorio_output)
-  write.table(library, "Variantes.VarScan2", row.names = F, sep = "\t")
+  write.table(library, "SNVs.VarScan2", row.names = F, sep = "\t")
   setwd(final_output)
-  write.table(library, "Variantes.VarScan2", row.names = F, sep = "\t")
+  write.table(library, "SNVs.VarScan2", row.names = F, sep = "\t")
 
   por = f*100/length(files_1)
-  cat(round(por, 0) , "% completado")
+  cat(round(por, 0) , "% completed")
 }
 
 cat("Done!\n")
