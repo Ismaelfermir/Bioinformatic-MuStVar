@@ -44,43 +44,43 @@ ADD . /home
 
 WORKDIR /home
 
-RUN cd /home/tools #&& wget https://ftp.pcre.org/pub/pcre/pcre-8.41.zip
-RUN cd /home/tools #&& unzip pcre-8.41.zip
+RUN cd /home/tools && wget https://ftp.pcre.org/pub/pcre/pcre-8.41.zip
+RUN cd /home/tools && unzip pcre-8.41.zip
 RUN rm -r /home/tools/pcre-8.41.zip
 RUN cd /home/tools/pcre-8.41 && ./configure --prefix=/usr --docdir=/usr/share/doc/pcre-8.42 --enable-unicode-properties --enable-pcre16 --enable-pcre32 --enable-pcregrep-libz --enable-pcregrep-libbz2 --enable-pcretest-libreadline --disable-static && make
 RUN cd /home/tools/pcre-8.41 && make install && mv -v /usr/lib/libpcre.so.* /lib && ln -sfv ../../lib/$(readlink /usr/lib/libpcre.so) /usr/lib/libpcre.so
 
-RUN cd /home/tools #&& wget https://github.com/samtools/htslib/releases/download/1.10.2/htslib-1.10.2.tar.bz2
-#RUN tar -xvjf /home/tools/htslib-1.10.2.tar.bz2
+RUN cd /home/tools && wget https://github.com/samtools/htslib/releases/download/1.10.2/htslib-1.10.2.tar.bz2
+RUN tar -xvjf /home/tools/htslib-1.10.2.tar.bz2
 RUN cd /home/tools/htslib-1.10.2 && ./configure
 RUN cd /home/tools/htslib-1.10.2 && make
 RUN cd /home/tools/htslib-1.10.2 && make install
-#RUN rm -r /home/tools/htslib-1.10.2.tar.bz2
+RUN rm -r /home/tools/htslib-1.10.2.tar.bz2
 
-RUN cd /home/tools #&& wget hhttps://github.com/samtools/samtools/releases/download/1.10/samtools-1.10.tar.bz2
-#RUN tar -xvjf /home/tools/samtools-1.10.tar.bz2
+RUN cd /home/tools && wget hhttps://github.com/samtools/samtools/releases/download/1.10/samtools-1.10.tar.bz2
+RUN tar -xvjf /home/tools/samtools-1.10.tar.bz2
 RUN cd /home/tools/samtools-1.10 && ./configure
 RUN cd /home/tools/samtools-1.10 && make
-#RUN rm -r /home/tools/samtools-1.10.tar.bz2
+RUN rm -r /home/tools/samtools-1.10.tar.bz2
 RUN cd /home/tools/samtools-1.10 && cp samtools /usr/bin
 
-RUN cd /home/tools #&& wget https://github.com/broadinstitute/gatk/releases/download/4.0.6.0/gatk-4.0.6.0.zip
-RUN cd /home/tools #&& unzip gatk-4.1.9.0.zip
-RUN cd /home/tools #&& rm -r gatk-4.1.4.1.zip
+RUN cd /home/tools && wget https://github.com/broadinstitute/gatk/releases/download/4.0.6.0/gatk-4.0.6.0.zip
+RUN cd /home/tools && unzip gatk-4.1.9.0.zip
+RUN cd /home/tools && rm -r gatk-4.1.4.1.zip
 RUN cd /home/tools/gatk-4.1.9.0 && cp gatk /usr/bin
 RUN export GATK_LOCAL_JAR=/home/tools/gatk-4.1.9.0/gatk-package-4.1.9.0-local.jar
 
-RUN cd /home ##&& wget https://github.com/Illumina/strelka/releases/download/v2.9.2/strelka-2.9.2.centos6_x86_64.tar.bz2
+RUN cd /home && wget https://github.com/Illumina/strelka/releases/download/v2.9.2/strelka-2.9.2.centos6_x86_64.tar.bz2
 RUN cd /home/tools/strelka-2.9.2.centos6_x86_64 #&& tar xvjf strelka-2.9.2.centos6_x86_64.tar.bz2
 RUN cd /home/tools/strelka-2.9.2.centos6_x86_64 && bash bin/runStrelkaSomaticWorkflowDemo.bash
 RUN cd /home/tools/strelka-2.9.2.centos6_x86_64 && bash bin/runStrelkaGermlineWorkflowDemo.bash
 
-RUN cd /home/tools #&& tar xvf R-3.6.3.tar.gz
+RUN cd /home/tools && tar xvf R-3.6.3.tar.gz
 RUN cd /home/tools/R-3.6.3 && ./configure
 RUN cd /home/tools/R-3.6.3 && make
 
-RUN cd /home/tools #&& wget https://github.com/samtools/bcftools/releases/download/1.10.2/bcftools-1.10.2.tar.bz2
-RUN cd /home/tools #&& tar -xf bcftools-1.10.2.tar.bz2
+RUN cd /home/tools && wget https://github.com/samtools/bcftools/releases/download/1.10.2/bcftools-1.10.2.tar.bz2
+RUN cd /home/tools && tar -xf bcftools-1.10.2.tar.bz2
 RUN cd /home/tools/bcftools-1.10.2 && ./configure
 RUN cd /home/tools/bcftools-1.10.2 && make
 RUN cd /home/tools/bcftools-1.10.2 && make install
