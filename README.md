@@ -17,14 +17,14 @@ Options:
 4. Panel bed file
 
 Note that the following databases must be downloaded for the ANNOVAR annotation tool:
-refGene
-cytoBand
-1000g2015aug_all
-1000g2015aug_eas
-1000g2015aug_eur
-avsnp150
-cosmic70
-clinvar_20190305
+- refGene
+- cytoBand
+- 1000g2015aug_all
+- 1000g2015aug_eas
+- 1000g2015aug_eur
+- avsnp150
+- cosmic70
+- clinvar_20190305
 
 ## 2. MuStVar filer
 The MuStVar.filter.R file contains the script to filter the SNVs and Indels from the three toools by:
