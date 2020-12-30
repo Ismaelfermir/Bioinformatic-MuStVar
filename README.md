@@ -3,7 +3,7 @@
 
 The tool consists of 3 parts:
 
-## 1. MuStVar
+### 1. MuStVar
 The MuStVar.sh file contains the script to call variants from the aligned files (GRCh38-hg38) with the three tools (**Mutect2**, **Strelka2** and **VarScan2**).
 
 First, make sure that your normal and tumor alignmet files are named as:
@@ -26,13 +26,13 @@ Note that the following databases must be downloaded for the ANNOVAR annotation 
 - cosmic70
 - clinvar_20190305
 
-## 2. MuStVar filer
+### 2. MuStVar filer
 The MuStVar.filter.R file contains the script to filter the SNVs and Indels from the three toools by:
 - Allele frequency > 0.5%
 - Altered region: exonic, splicing and UTRs
 - Read depth => 500
 - Read depth of altered allele: => 30
 
-## 3. Compare
+### 3. Compare
 The compare.callers.R file will compare the filtered SNVs and Indels and select just the alterations that are shared by at least two tools. Also it will annotate each alteration with the data base for detecting PCR and panel errors.
 
