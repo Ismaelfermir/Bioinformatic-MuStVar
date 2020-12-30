@@ -27,12 +27,14 @@ Note that the following databases must be downloaded for the ANNOVAR annotation 
 - clinvar_20190305
 
 ### 2. Filter
-The MuStVar.filter.R file contains the script to filter the SNVs and Indels from the three toools by:
+The MuStVar.filter.R file contains the script to filter the SNVs and Indels from the three tools by these data base information:
 - Allele frequency > 0.5%
 - Altered region: exonic, splicing and UTRs
 - Read depth => 500
 - Read depth of altered allele: => 30
 
 ### 3. Compare
-The compare.callers.R file will compare the filtered SNVs and Indels and select just the alterations that are shared by at least two tools. Also it will annotate each alteration with the data base for detecting PCR and panel errors.
+The compare.callers.R file will compare the filtered SNVs and Indels and select just the alterations that are shared by at least two tools. Also it will annotate each alteration with the data base for detecting PCR and panel errors. The script it will report the mutations present in just one variant calling tool.
+
+Note that the final result of alterations may not be 100% correct. A manual check for each mutation is needed.
 
