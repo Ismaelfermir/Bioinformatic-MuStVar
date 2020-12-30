@@ -26,7 +26,7 @@ Note that the following databases must be downloaded for the ANNOVAR annotation 
 - cosmic70
 - clinvar_20190305
 
-### 2. MuStVar filer
+### 2. Filter
 The MuStVar.filter.R file contains the script to filter the SNVs and Indels from the three toools by:
 - Allele frequency > 0.5%
 - Altered region: exonic, splicing and UTRs
